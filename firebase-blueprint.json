@@ -1,0 +1,148 @@
+{
+  "entities": {
+    "Employee": {
+      "title": "Employee",
+      "description": "Registered employee profile with biometric and shift details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string" },
+        "department": { "type": "string" },
+        "shiftName": { "type": "string" },
+        "shiftStart": { "type": "string" },
+        "shiftEnd": { "type": "string" },
+        "workLocation": { "type": "string" },
+        "phone": { "type": "string" },
+        "joinDate": { "type": "string" },
+        "avatarColor": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "biometric": {
+          "type": "object",
+          "properties": {
+            "finger": { "type": "string" },
+            "enrolledAt": { "type": "string" },
+            "fingerprintHash": { "type": "string" },
+            "isEnrolled": { "type": "boolean" }
+          }
+        },
+        "temporaryPassword": { "type": "string" },
+        "isEmailVerified": { "type": "boolean" }
+      },
+      "required": ["id", "name", "email", "role", "department", "shiftStart", "shiftEnd"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Daily employee attendance punch record with shift calculations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "date": { "type": "string" },
+        "inTime": { "type": "string" },
+        "outTime": { "type": "string" },
+        "status": { "type": "string" },
+        "workHours": { "type": "number" },
+        "overtimeHours": { "type": "number" },
+        "locationType": { "type": "string" },
+        "notes": { "type": "string" },
+        "breakMinutes": { "type": "number" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" }
+      },
+      "required": ["id", "employeeId", "employeeName", "date", "status", "workHours"]
+    },
+    "Holiday": {
+      "title": "Holiday",
+      "description": "Official company holiday or Sunday weekly off definition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string" },
+        "isMandatory": { "type": "boolean" }
+      },
+      "required": ["id", "name", "date", "type"]
+    },
+    "LeaveRequest": {
+      "title": "LeaveRequest",
+      "description": "Staff leave application with work handover coverage",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "leaveType": { "type": "string" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "reason": { "type": "string" },
+        "handoverEmployeeId": { "type": "string" },
+        "handoverEmployeeName": { "type": "string" },
+        "status": { "type": "string" },
+        "appliedAt": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "employeeName", "leaveType", "startDate", "endDate", "status"]
+    },
+    "SystemEvent": {
+      "title": "SystemEvent",
+      "description": "Audit event or broadcast announcement",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "severity": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "targetDepartment": { "type": "string" },
+        "author": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "category", "severity", "timestamp"]
+    },
+    "DispatchedEmail": {
+      "title": "DispatchedEmail",
+      "description": "Email verification or welcome onboarding email record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "recipientEmail": { "type": "string" },
+        "recipientName": { "type": "string" },
+        "subject": { "type": "string" },
+        "type": { "type": "string" },
+        "otpCode": { "type": "string" },
+        "sentAt": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "recipientEmail", "recipientName", "subject", "type", "sentAt", "status"]
+    }
+  },
+  "firestore": {
+    "/employees/{employeeId}": {
+      "schema": { "$ref": "#/entities/Employee" },
+      "description": "Registered company employees and biometric registrations"
+    },
+    "/attendanceRecords/{recordId}": {
+      "schema": { "$ref": "#/entities/AttendanceRecord" },
+      "description": "Live attendance punches and shift logs"
+    },
+    "/holidays/{holidayId}": {
+      "schema": { "$ref": "#/entities/Holiday" },
+      "description": "Official company holidays and Sunday weekly offs"
+    },
+    "/leaveRequests/{leaveRequestId}": {
+      "schema": { "$ref": "#/entities/LeaveRequest" },
+      "description": "Staff leave applications and work coverage delegation"
+    },
+    "/systemEvents/{eventId}": {
+      "schema": { "$ref": "#/entities/SystemEvent" },
+      "description": "Audit events, directives, and notifications"
+    },
+    "/dispatchedEmails/{emailId}": {
+      "schema": { "$ref": "#/entities/DispatchedEmail" },
+      "description": "Email verification and onboarding records"
+    }
+  }
+}

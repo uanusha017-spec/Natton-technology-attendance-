@@ -1,0 +1,7 @@
+{
+  "name": "Natton Technology",
+  "description": "Natton Technology Official Attendance Tracker & Staff Management System with 09:30 AM - 06:00 PM shift scheduling, Sunday weekly holidays, Admin Login, and automatic office stay duration calculation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

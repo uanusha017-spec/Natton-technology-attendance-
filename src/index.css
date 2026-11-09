@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer utilities {
+  @media print {
+    /* Hide screen UI elements */
+    header,
+    footer,
+    nav,
+    button:not(.print-include),
+    .print\:hidden,
+    .no-print,
+    input:not([type="checkbox"]),
+    select,
+    aside,
+    [role="dialog"] {
+      display: none !important;
+    }
+
+    body {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      font-size: 10pt !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    main {
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .print\:block,
+    .print-only {
+      display: block !important;
+    }
+
+    .print\:inline-block {
+      display: inline-block !important;
+    }
+
+    .print-exact {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Clean corporate print table layout */
+    table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      page-break-inside: auto !important;
+    }
+
+    tr {
+      page-break-inside: avoid !important;
+      page-break-after: auto !important;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1 !important;
+      padding: 5px 8px !important;
+      font-size: 8.5pt !important;
+    }
+
+    th {
+      background-color: #f1f5f9 !important;
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm 10mm;
+    }
+  }
+}
